@@ -133,7 +133,9 @@ export default function Search() {
           </Table>
         </TableContainer>
       )}
-      <Text textAlign="center">page: {shownLots[0] / 10 + 1}</Text>
+      <Text textAlign="center">
+        page: {shownLots[0] / 10 + 1}/{Math.ceil(filteredLots.length / 10)}
+      </Text>
       <HStack
         m="30px"
         display="flex"
