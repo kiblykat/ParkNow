@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-import axios from "axios";
-import carparkDetails from "../data/HDBCarparkInformation.json";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
+import { useWindowSize } from "@uidotdev/usehooks";
+
 import {
   Button,
   HStack,
@@ -10,57 +12,31 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
 
 export default function Search() {
   const globalCtx = useContext(GlobalContext);
   const [shownLots, setShownLots] = useState([0, 9]);
+  const size = useWindowSize();
 
-  const { search, setSearch, parkList, setParkList, isLoading, setIsLoading } =
-    globalCtx;
+  const {
+    search,
+    setSearch,
+    parkList,
+    isLoading,
+    getSlots,
+    favoriteList,
+    handleFavorites,
+  } = globalCtx;
 
   useEffect(() => {
     getSlots();
   }, []);
 
-  const getSlots = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(
-        "https://api.data.gov.sg/v1/transport/carpark-availability"
-      );
-      //- - - SORT  parklist in alphabetical order - - -
-      response.data.items[0].carpark_data.sort((a, b) =>
-        a.carpark_number.localeCompare(b.carpark_number)
-      );
-
-      //- - - MERGE parklist with json - - -
-      const mergedData = response.data.items[0].carpark_data.map((carpark) => {
-        const details = carparkDetails.find(
-          (detail) => detail.car_park_no === carpark.carpark_number
-        );
-        return { ...carpark, ...details };
-      });
-      console.log("merged data", mergedData);
-
-      //SET parkList value
-      setParkList(mergedData);
-
-      console.log(
-        "response.data.items[0].carpark_data: ",
-        response.data.items[0].carpark_data
-      );
-    } catch (error) {
-      console.log(`🔴 error encountered: ${error}`);
-    } finally {
-      setIsLoading(false);
-      return null;
-    }
-  };
   //FILTER FUNCTION
   // search === "" ? parkingLot:
   const filteredLots = parkList.filter((parkingLot) => {
@@ -96,44 +72,68 @@ export default function Search() {
         onChange={(e) => setSearch(e.target.value)}
         value={search}
       />
-      <TableContainer>
-        <Table variant="striped" colorScheme="orange">
-          <Thead>
-            <Tr>
-              <Th>Carpark Number</Th>
-              <Th>Address</Th>
-              <Th>Lots Available</Th>
-              <Th>Total Lots</Th>
-              <Th>View on Map 🗺️</Th>
-              <Th>Add to Fav</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredLots
-              .slice(shownLots[0], shownLots[1])
-              .map((parkingLot) => (
-                <Tr>
-                  <Td>{parkingLot.carpark_number}</Td>
-                  <Td>{parkingLot.address}</Td>
-                  <Td>{parkingLot.carpark_info[0].lots_available}</Td>
-                  <Td>{parkingLot.carpark_info[0].total_lots}</Td>
-                  <Td>
-                    <NavLink
-                      to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
-                    >
-                      <Button colorScheme="orange">Map View</Button>
-                    </NavLink>
-                  </Td>
-                  <Td>
-                    <Button colorScheme="orange" onClick={() => null}>
-                      Favorite ⭐
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      {isLoading ? (
+        <Flex
+          w="100vw"
+          m="10px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Spinner color="orange" size="xl" emptyColor="blue" />
+        </Flex>
+      ) : (
+        <TableContainer>
+          <Table variant="striped" colorScheme="orange">
+            <Thead>
+              <Tr>
+                <Th>Carpark Number</Th>
+                <Th>Address</Th>
+                <Th>Lots Available</Th>
+                {size.width > 768 ? (
+                  <>
+                    <Th>Total Lots</Th>
+                    <Th>View on Map 🗺️</Th>
+                    <Th>Add to Fav</Th>
+                  </>
+                ) : null}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {filteredLots
+                .slice(shownLots[0], shownLots[1])
+                .map((parkingLot) => (
+                  <Tr key={parkingLot.carpark_number}>
+                    <Td>{parkingLot.carpark_number}</Td>
+                    <Td>{parkingLot.address}</Td>
+                    <Td>{parkingLot.carpark_info[0].lots_available}</Td>
+                    {size.width > 768 ? (
+                      <>
+                        <Td>{parkingLot.carpark_info[0].total_lots}</Td>
+                        <Td>
+                          <NavLink
+                            to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
+                          >
+                            <Button colorScheme="orange">Map View</Button>
+                          </NavLink>
+                        </Td>
+                        <Td>
+                          <Button
+                            colorScheme="orange"
+                            onClick={() => handleFavorites()}
+                          >
+                            Favorite ⭐
+                          </Button>
+                        </Td>
+                      </>
+                    ) : null}
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      )}
+      <Text textAlign="center">page: {shownLots[0] / 10 + 1}</Text>
       <HStack
         m="30px"
         display="flex"
