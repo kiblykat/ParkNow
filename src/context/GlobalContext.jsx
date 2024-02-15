@@ -54,18 +54,19 @@ export function GlobalProvider({ children }) {
 
     if (!isAlreadyFavorite) {
       // Add to favoriteList only if it's not already a favorite.
-      setFavoriteList([
+      const newFavoriteList = [
         ...favoriteList,
         parkList.find(
           (parkingLot) => parkingLot.carpark_number === carpark_number
         ),
-      ]);
+      ];
+      setFavoriteList(newFavoriteList);
+      localStorage.setItem("favorites", JSON.stringify(newFavoriteList));
+      console.log("local storage is: " + localStorage.getItem("favorites"));
     } else {
       // Optionally handle the case when it's already a favorite, like showing an alert.
       console.log("This carpark number is already in your favorites.");
     }
-
-    console.log(favoriteList);
   };
 
   //FILTER FUNCTION
@@ -96,8 +97,6 @@ export function GlobalProvider({ children }) {
 
     setShownLots(newShownLots);
   };
-
-  const handleMapClick = () => {};
 
   const context = {
     search,
