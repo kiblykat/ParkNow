@@ -9,6 +9,7 @@ export function GlobalProvider({ children }) {
   const [parkList, setParkList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [favoriteList, setFavoriteList] = useState([]);
+  const [shownLots, setShownLots] = useState([0, 9]);
 
   const getSlots = async () => {
     try {
@@ -67,6 +68,35 @@ export function GlobalProvider({ children }) {
     console.log(favoriteList);
   };
 
+  //FILTER FUNCTION
+  // search === "" ? parkingLot:
+  const filteredLots = parkList.filter((parkingLot) => {
+    return (
+      parkingLot.address?.includes(search.toUpperCase()) ||
+      parkingLot.carpark_number.includes(search.toUpperCase())
+    );
+  });
+
+  //Set Current Shown Lots
+  const nextPage = () => {
+    const newShownLots = [...shownLots];
+    newShownLots[0] += 10;
+    newShownLots[1] += 10;
+    console.log(shownLots);
+    setShownLots(newShownLots);
+  };
+
+  const prevPage = () => {
+    const newShownLots = [...shownLots];
+    if (shownLots[0] - 10 >= 0) {
+      newShownLots[0] -= 10;
+      newShownLots[1] -= 10;
+    }
+    console.log(shownLots);
+
+    setShownLots(newShownLots);
+  };
+
   const context = {
     search,
     setSearch,
@@ -77,6 +107,10 @@ export function GlobalProvider({ children }) {
     getSlots,
     favoriteList,
     handleFavorites,
+    filteredLots,
+    nextPage,
+    prevPage,
+    shownLots,
   };
 
   return (
