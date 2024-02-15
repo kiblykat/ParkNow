@@ -1,22 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-import { Box, Flex, Spinner } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
-import { useWindowSize } from "@uidotdev/usehooks"; //use to add responsiveness based on window size
 
-import {
-  Button,
-  HStack,
-  Input,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Button, HStack, Input, Text } from "@chakra-ui/react";
 import SearchTable from "../components/SearchTable";
 
 export default function Search() {
@@ -25,11 +10,9 @@ export default function Search() {
   const {
     search,
     setSearch,
-    parkList,
-    isLoading,
+
     getSlots,
-    favoriteList,
-    handleFavorites,
+
     filteredLots,
     nextPage,
     prevPage,
