@@ -45,7 +45,7 @@ export default function SearchTable() {
               <Table variant="striped" colorScheme="orange">
                 <Thead>
                   <Tr>
-                    <Th textAlign="center" maxWidth={{ base: "70px" }}>
+                    <Th textAlign="center" maxWidth="70px">
                       Lot No.
                     </Th>
                     <Th textAlign="center">Address</Th>
@@ -110,10 +110,10 @@ export default function SearchTable() {
               <Table variant="striped" colorScheme="orange">
                 <Thead>
                   <Tr>
-                    <Th maxWidth="70px" pl="5px">
+                    <Th textAlign="center" maxWidth="70px">
                       Lot No.
                     </Th>
-                    <Th maxWidth="60px" ml="2px" mr="2px">
+                    <Th textAlign="center" maxWidth="60px" ml="2px" mr="2px">
                       Address
                     </Th>
                     <Th textAlign="center" maxWidth="60px" p="5px">
