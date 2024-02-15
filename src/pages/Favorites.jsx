@@ -18,7 +18,7 @@ import { NavLink } from "react-router-dom";
 export default function Favorites() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
-  const { isLoading, handleFavorites, filteredLots, shownLots } = globalCtx;
+  const { isLoading, filteredLots, shownLots, favoriteList } = globalCtx;
 
   return (
     <>
@@ -48,7 +48,7 @@ export default function Favorites() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {filteredLots
+                  {favoriteList
                     .slice(shownLots[0], shownLots[1])
                     .map((parkingLot) => (
                       <Tr key={parkingLot.carpark_number}>
@@ -65,11 +65,13 @@ export default function Favorites() {
                             parkingLot.carpark_info[0].total_lots}
                         </Td>
                         <Td textAlign="center">
-                          <NavLink
-                            to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
+                          <a
+                            href={`https://www.google.com/maps?q=${parkingLot.address
+                              .split(" ")
+                              .join("+")}`}
                           >
                             <Button colorScheme="orange">Map View</Button>
-                          </NavLink>
+                          </a>
                         </Td>
                       </Tr>
                     ))}
@@ -109,7 +111,7 @@ export default function Favorites() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {filteredLots
+                  {favoriteList
                     .slice(shownLots[0], shownLots[1])
                     .map((parkingLot) => (
                       <Tr key={parkingLot.carpark_number}>
@@ -131,11 +133,13 @@ export default function Favorites() {
                             parkingLot.carpark_info[0].total_lots}
                         </Td>
                         <Td textAlign="center">
-                          <NavLink
-                            to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
+                          <a
+                            href={`https://www.google.com/maps?q=${parkingLot.address
+                              .split(" ")
+                              .join("+")}`}
                           >
                             <Button colorScheme="orange">🗺️</Button>
-                          </NavLink>
+                          </a>
                         </Td>
                       </Tr>
                     ))}

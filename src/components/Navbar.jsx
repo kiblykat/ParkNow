@@ -43,8 +43,8 @@ export default function Navbar() {
         }}
       >
         <Box display="flex" alignItems="center">
-          <Avatar name="GoParkUrself" src="/img/carIcon.jfif" m="20px" />
-          <Heading>GoParkUrself</Heading>
+          <Avatar name="ParkNow" src="/img/carIcon.jfif" m="20px" />
+          <Heading>ParkNow</Heading>
         </Box>
 
         <HStack>

@@ -10,9 +10,7 @@ export default function Search() {
   const {
     search,
     setSearch,
-
     getSlots,
-
     filteredLots,
     nextPage,
     prevPage,

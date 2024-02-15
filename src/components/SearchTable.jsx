@@ -18,13 +18,7 @@ import { NavLink } from "react-router-dom";
 export default function SearchTable() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
-  const {
-    isLoading,
-    handleFavorites,
-    filteredLots,
-
-    shownLots,
-  } = globalCtx;
+  const { isLoading, handleFavorites, filteredLots, shownLots } = globalCtx;
 
   return (
     <>
@@ -76,17 +70,21 @@ export default function SearchTable() {
                         <Td textAlign="center">
                           <Button
                             colorScheme="orange"
-                            onClick={() => handleFavorites()}
+                            onClick={() =>
+                              handleFavorites(parkingLot.carpark_number)
+                            }
                           >
                             ⭐ Favorite
                           </Button>
                         </Td>
                         <Td textAlign="center">
-                          <NavLink
-                            to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
+                          <a
+                            href={`https://www.google.com/maps?q=${parkingLot.address
+                              .split(" ")
+                              .join("+")}`}
                           >
                             <Button colorScheme="orange">Map View</Button>
-                          </NavLink>
+                          </a>
                         </Td>
                       </Tr>
                     ))}
@@ -121,7 +119,9 @@ export default function SearchTable() {
                     <Th textAlign="center" maxWidth="60px" p="5px">
                       Avail
                     </Th>
-                    <Th p="5px">Add to Fav</Th>
+                    <Th textAlign="center" p="5px">
+                      Add to Fav
+                    </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -149,7 +149,9 @@ export default function SearchTable() {
                         <Td textAlign="center">
                           <Button
                             colorScheme="orange"
-                            onClick={() => handleFavorites()}
+                            onClick={() =>
+                              handleFavorites(parkingLot.carpark_number)
+                            }
                           >
                             ⭐
                           </Button>

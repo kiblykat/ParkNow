@@ -97,6 +97,8 @@ export function GlobalProvider({ children }) {
     setShownLots(newShownLots);
   };
 
+  const handleMapClick = () => {};
+
   const context = {
     search,
     setSearch,

@@ -11,9 +11,7 @@ root.render(
   <React.StrictMode>
     <GlobalProvider>
       <ChakraProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
+        <App />
       </ChakraProvider>
     </GlobalProvider>
   </React.StrictMode>
