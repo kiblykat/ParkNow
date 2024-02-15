@@ -41,6 +41,8 @@ export default function SearchTable() {
               <Spinner color="orange" size="xl" emptyColor="blue" />
             </Flex>
           ) : (
+            /* = = = = = = = = = = RESPONSIVE VIEW FOR PHONES <768PX = = = = = = = = = = */
+
             <TableContainer>
               <Table variant="striped" colorScheme="orange">
                 <Thead>
