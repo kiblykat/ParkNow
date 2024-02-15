@@ -3,14 +3,11 @@ import GlobalContext from "../context/GlobalContext";
 import {
   Button,
   Flex,
-  HStack,
-  Input,
   Spinner,
   Table,
   TableContainer,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
@@ -22,84 +19,146 @@ export default function SearchTable() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
   const {
-    search,
-    setSearch,
-    parkList,
     isLoading,
-    getSlots,
-    favoriteList,
     handleFavorites,
     filteredLots,
-    nextPage,
-    prevPage,
+
     shownLots,
   } = globalCtx;
 
   return (
     <>
-      {isLoading ? (
-        <Flex
-          w="100vw"
-          m="10px"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Spinner color="orange" size="xl" emptyColor="blue" />
-        </Flex>
-      ) : (
-        <TableContainer>
-          <Table variant="striped" colorScheme="orange">
-            <Thead>
-              <Tr>
-                <Th maxWidth={{ base: "70px" }}>Lot No.</Th>
-                <Th>Address</Th>
-                <Td maxWidth="70px">Avail</Td>
-                <Th>Add to Fav</Th>
-                {size.width > 768 ? (
-                  <>
-                    <Th>Total Lots</Th>
-                    <Th>View on Map 🗺️</Th>
-                  </>
-                ) : null}
-              </Tr>
-            </Thead>
-            <Tbody>
-              {filteredLots
-                .slice(shownLots[0], shownLots[1])
-                .map((parkingLot) => (
-                  <Tr key={parkingLot.carpark_number}>
-                    <Td maxWidth="70px">{parkingLot.carpark_number}</Td>
-                    <Td whiteSpace={"wrap"}>{parkingLot.address}</Td>{" "}
-                    {/*whitespace allows for text wrap*/}
-                    <Td maxWidth="70px">
-                      {parkingLot.carpark_info[0].lots_available}
-                    </Td>
-                    <Td>
-                      <Button
-                        colorScheme="orange"
-                        onClick={() => handleFavorites()}
-                      >
-                        ⭐
-                      </Button>
-                    </Td>
-                    {size.width > 768 ? (
-                      <>
-                        <Td>{parkingLot.carpark_info[0].total_lots}</Td>
-                        <Td>
+      {size.width > 768 ? (
+        <div>
+          {isLoading ? (
+            <Flex
+              w="100vw"
+              m="10px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Spinner color="orange" size="xl" emptyColor="blue" />
+            </Flex>
+          ) : (
+            <TableContainer>
+              <Table variant="striped" colorScheme="orange">
+                <Thead>
+                  <Tr>
+                    <Th textAlign="center" maxWidth={{ base: "70px" }}>
+                      Lot No.
+                    </Th>
+                    <Th textAlign="center">Address</Th>
+                    <Th textAlign="center">Available Lots</Th>
+                    <Th textAlign="center">Add to Favorite</Th>
+                    <Th textAlign="center">View on Map 🗺️</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {filteredLots
+                    .slice(shownLots[0], shownLots[1])
+                    .map((parkingLot) => (
+                      <Tr key={parkingLot.carpark_number}>
+                        <Td textAlign="center" maxWidth="70px">
+                          {parkingLot.carpark_number}
+                        </Td>
+                        <Td textAlign="center" whiteSpace={"wrap"}>
+                          {parkingLot.address}
+                        </Td>
+                        {/*whitespace allows for text wrap*/}
+                        <Td textAlign="center" maxWidth="70px">
+                          {parkingLot.carpark_info[0].lots_available +
+                            "/" +
+                            parkingLot.carpark_info[0].total_lots}
+                        </Td>
+                        <Td textAlign="center">
+                          <Button
+                            colorScheme="orange"
+                            onClick={() => handleFavorites()}
+                          >
+                            ⭐ Favorite
+                          </Button>
+                        </Td>
+                        <Td textAlign="center">
                           <NavLink
                             to={`/search/${parkingLot.x_coord},${parkingLot.y_coord}`}
                           >
                             <Button colorScheme="orange">Map View</Button>
                           </NavLink>
                         </Td>
-                      </>
-                    ) : null}
+                      </Tr>
+                    ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          )}
+        </div>
+      ) : (
+        <div>
+          {isLoading ? (
+            <Flex
+              w="100vw"
+              m="10px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Spinner color="orange" size="xl" emptyColor="blue" />
+            </Flex>
+          ) : (
+            <TableContainer>
+              <Table variant="striped" colorScheme="orange">
+                <Thead>
+                  <Tr>
+                    <Th maxWidth="70px" pl="5px">
+                      Lot No.
+                    </Th>
+                    <Th maxWidth="60px" ml="2px" mr="2px">
+                      Address
+                    </Th>
+                    <Th textAlign="center" maxWidth="60px" p="5px">
+                      Avail
+                    </Th>
+                    <Th p="5px">Add to Fav</Th>
                   </Tr>
-                ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+                </Thead>
+                <Tbody>
+                  {filteredLots
+                    .slice(shownLots[0], shownLots[1])
+                    .map((parkingLot) => (
+                      <Tr key={parkingLot.carpark_number}>
+                        <Td textAlign="center" maxWidth="60px" p="5px">
+                          {parkingLot.carpark_number}
+                        </Td>
+                        <Td
+                          textAlign="center"
+                          maxWidth="140px"
+                          whiteSpace={"wrap"}
+                          p="5px"
+                        >
+                          {parkingLot.address}
+                        </Td>
+                        {/*whitespace allows for text wrap*/}
+                        <Td textAlign="center" p="5px" maxWidth="70px">
+                          {parkingLot.carpark_info[0].lots_available +
+                            "/" +
+                            parkingLot.carpark_info[0].total_lots}
+                        </Td>
+                        <Td textAlign="center">
+                          <Button
+                            colorScheme="orange"
+                            onClick={() => handleFavorites()}
+                          >
+                            ⭐
+                          </Button>
+                        </Td>
+                      </Tr>
+                    ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          )}
+        </div>
       )}
     </>
   );
