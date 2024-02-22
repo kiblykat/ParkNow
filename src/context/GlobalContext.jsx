@@ -80,11 +80,16 @@ export function GlobalProvider({ children }) {
 
   //Set Current Shown Lots
   const nextPage = () => {
-    const newShownLots = [...shownLots];
-    newShownLots[0] += 10;
-    newShownLots[1] += 10;
-    console.log(shownLots);
-    setShownLots(newShownLots);
+    if (
+      Math.floor(shownLots[0] / 10) <=
+      Math.floor(filteredLots.length / 10) + 1
+    ) {
+      const newShownLots = [...shownLots];
+      newShownLots[0] += 10;
+      newShownLots[1] += 10;
+      console.log(shownLots);
+      setShownLots(newShownLots);
+    }
   };
 
   const prevPage = () => {
