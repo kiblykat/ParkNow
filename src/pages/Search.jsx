@@ -32,7 +32,7 @@ export default function Search() {
       />
       <SearchTable />
       <Text textAlign="center">
-        page: {shownLots[0] / 10 + 1}/{Math.ceil(filteredLots.length / 10)}
+        page: {shownLots[0] / 10 + 1}/{Math.floor(filteredLots.length / 10) + 1}
       </Text>
       <HStack
         m="30px"
