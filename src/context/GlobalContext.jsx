@@ -80,10 +80,9 @@ export function GlobalProvider({ children }) {
 
   //Set Current Shown Lots
   const nextPage = () => {
-    if (
-      Math.floor(shownLots[0] / 10) <=
-      Math.floor(filteredLots.length / 10) + 1
-    ) {
+    if (Math.floor(shownLots[0] / 10) < Math.floor(filteredLots.length / 10)) {
+      console.log("shownLots " + shownLots[0]);
+      console.log("filteredLots.length " + filteredLots.length);
       const newShownLots = [...shownLots];
       newShownLots[0] += 10;
       newShownLots[1] += 10;
@@ -98,7 +97,7 @@ export function GlobalProvider({ children }) {
       newShownLots[0] -= 10;
       newShownLots[1] -= 10;
     }
-    console.log(shownLots);
+    console.log(newShownLots);
 
     setShownLots(newShownLots);
   };
