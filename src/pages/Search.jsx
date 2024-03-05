@@ -15,10 +15,12 @@ export default function Search() {
     nextPage,
     prevPage,
     shownLots,
+    apiGetFav,
   } = globalCtx;
 
   useEffect(() => {
     getSlots();
+    apiGetFav();
   }, []);
 
   return (
