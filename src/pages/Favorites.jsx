@@ -27,6 +27,7 @@ export default function Favorites() {
     filteredLots,
     shownLots,
     getSlots,
+    apiHandleDelete,
   } = globalCtx;
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Favorites() {
                     <Th textAlign="center">Address</Th>
                     <Th textAlign="center">Available Lots</Th>
                     <Th textAlign="center">View on Map 🗺️</Th>
+                    <Th textAlign="center">Delete ❌</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -95,6 +97,14 @@ export default function Favorites() {
                           >
                             <Button colorScheme="orange">Map View</Button>
                           </a>
+                        </Td>
+                        <Td textAlign="center">
+                          <Button
+                            colorScheme="orange"
+                            onClick={() => apiHandleDelete(parkingLot.id)}
+                          >
+                            Delete ❌
+                          </Button>
                         </Td>
                       </Tr>
                     ))}
@@ -131,6 +141,7 @@ export default function Favorites() {
                       Avail
                     </Th>
                     <Th textAlign="center">Map</Th>
+                    <Th textAlign="center">Del</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -163,6 +174,12 @@ export default function Favorites() {
                           >
                             <Button colorScheme="orange">🗺️</Button>
                           </a>
+                        </Td>
+                        <Td
+                          textAlign="center"
+                          onClick={() => apiHandleDelete(parkingLot.id)}
+                        >
+                          ❌
                         </Td>
                       </Tr>
                     ))}
