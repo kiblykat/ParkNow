@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import carparkDetails from "../data/HDBCarparkInformation.json";
+import mockAPI from "../api/mockapi";
 
 const GlobalContext = createContext();
 
@@ -10,6 +11,48 @@ export function GlobalProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [favoriteList, setFavoriteList] = useState([]);
   const [shownLots, setShownLots] = useState([0, 9]);
+
+  const apiGetFav = async () => {
+    try {
+      const response = await mockAPI.get("/favorites");
+      setFavoriteList(response.data);
+      console.log("response.data is: ", response.data);
+      console.log("favoriteList is: ", favoriteList);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      console.log("favorite list: ", favoriteList);
+    }
+  };
+
+  const handleFavorites = async (
+    carpark_number,
+    address,
+    lots_available,
+    total_lots
+  ) => {
+    // Check if the carpark_number already exists in favoriteList.
+
+    const isAlreadyFavorite = favoriteList.some(
+      (parkingLot) => parkingLot.carpark_number === carpark_number
+    );
+
+    if (!isAlreadyFavorite) {
+      let newFavorite = {
+        carpark_number: carpark_number,
+        address: address,
+        lots_available: lots_available,
+        total_lots: total_lots,
+      };
+      try {
+        const response = await mockAPI.post("/favorites", newFavorite);
+        console.log("response data from mockapi is:", response.data);
+        await apiGetFav();
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
 
   const getSlots = async () => {
     try {
@@ -29,43 +72,14 @@ export function GlobalProvider({ children }) {
         );
         return { ...carpark, ...details };
       });
-      console.log("merged data", mergedData);
 
       //SET parkList value
       setParkList(mergedData);
-
-      console.log(
-        "response.data.items[0].carpark_data: ",
-        response.data.items[0].carpark_data
-      );
     } catch (error) {
       console.log(`🔴 error encountered: ${error}`);
     } finally {
       setIsLoading(false);
       return null;
-    }
-  };
-
-  const handleFavorites = (carpark_number) => {
-    // Check if the carpark_number already exists in favoriteList.
-    const isAlreadyFavorite = favoriteList.some(
-      (parkingLot) => parkingLot.carpark_number === carpark_number
-    );
-
-    if (!isAlreadyFavorite) {
-      // Add to favoriteList only if it's not already a favorite.
-      const newFavoriteList = [
-        ...favoriteList,
-        parkList.find(
-          (parkingLot) => parkingLot.carpark_number === carpark_number
-        ),
-      ];
-      setFavoriteList(newFavoriteList);
-      localStorage.setItem("favorites", JSON.stringify(newFavoriteList));
-      console.log("local storage is: " + localStorage.getItem("favorites"));
-    } else {
-      // Optionally handle the case when it's already a favorite, like showing an alert.
-      console.log("This carpark number is already in your favorites.");
     }
   };
 
@@ -111,11 +125,13 @@ export function GlobalProvider({ children }) {
     setIsLoading,
     getSlots,
     favoriteList,
+    setFavoriteList,
     handleFavorites,
     filteredLots,
     nextPage,
     prevPage,
     shownLots,
+    apiGetFav,
   };
 
   return (

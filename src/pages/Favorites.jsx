@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import mockAPI from "../api/mockapi";
+
 import {
   Button,
   Flex,
@@ -18,10 +20,31 @@ import { NavLink } from "react-router-dom";
 export default function Favorites() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
-  const { isLoading, filteredLots, shownLots, favoriteList } = globalCtx;
+  const {
+    favoriteList,
+    setFavoriteList,
+    isLoading,
+    filteredLots,
+    shownLots,
+    getSlots,
+  } = globalCtx;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await mockAPI.get("/favorites");
+        console.log("response.data is", response.data);
+        setFavoriteList(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
+      {console.log("favorite list in Fav: " + { favoriteList })}
       {size.width > 768 ? (
         <div>
           {isLoading ? (
@@ -49,7 +72,7 @@ export default function Favorites() {
                 </Thead>
                 <Tbody>
                   {favoriteList
-                    .slice(shownLots[0], shownLots[1])
+                    // .slice(shownLots[0], shownLots[1])
                     .map((parkingLot) => (
                       <Tr key={parkingLot.carpark_number}>
                         <Td textAlign="center" maxWidth="70px">
@@ -60,9 +83,9 @@ export default function Favorites() {
                         </Td>
                         {/*whitespace allows for text wrap*/}
                         <Td textAlign="center" maxWidth="70px">
-                          {parkingLot.carpark_info[0].lots_available +
+                          {parkingLot.lots_available +
                             "/" +
-                            parkingLot.carpark_info[0].total_lots}
+                            parkingLot.total_lots}
                         </Td>
                         <Td textAlign="center">
                           <a
@@ -112,7 +135,7 @@ export default function Favorites() {
                 </Thead>
                 <Tbody>
                   {favoriteList
-                    .slice(shownLots[0], shownLots[1])
+                    // .slice(shownLots[0], shownLots[1])
                     .map((parkingLot) => (
                       <Tr key={parkingLot.carpark_number}>
                         <Td textAlign="center" maxWidth="60px" p="5px">
@@ -128,9 +151,9 @@ export default function Favorites() {
                         </Td>
                         {/*whitespace allows for text wrap*/}
                         <Td textAlign="center" p="5px" maxWidth="70px">
-                          {parkingLot.carpark_info[0].lots_available +
+                          {parkingLot.lots_available +
                             "/" +
-                            parkingLot.carpark_info[0].total_lots}
+                            parkingLot.total_lots}
                         </Td>
                         <Td textAlign="center">
                           <a
