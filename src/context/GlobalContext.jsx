@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import carparkDetails from "../data/HDBCarparkInformation.json";
 import mockAPI from "../api/mockapi";
+import axios from "axios";
 
 const GlobalContext = createContext();
 
