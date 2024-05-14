@@ -62,7 +62,7 @@ export default function Navbar() {
         </HStack>
 
         <HStack m="50px">
-          <NavLink to="search">
+          <NavLink to="/">
             <Button
               leftIcon={<SearchIcon />}
               colorScheme="orange"
