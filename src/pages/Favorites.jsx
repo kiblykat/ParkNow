@@ -94,6 +94,8 @@ export default function Favorites() {
                             href={`https://www.google.com/maps?q=${parkingLot.address
                               .split(" ")
                               .join("+")}`}
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <Button colorScheme="orange">Map View</Button>
                           </a>
