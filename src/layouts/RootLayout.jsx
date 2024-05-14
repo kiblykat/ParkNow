@@ -5,8 +5,10 @@ import Navbar from "../components/Navbar";
 export default function RootLayout() {
   return (
     <div>
-      <Navbar />
-      <Outlet />
+      <Navbar style={{ backgroundColor: "#003f7d" }} />
+      <div style={{ padding: "10px" }}>
+        <Outlet />
+      </div>
     </div>
   );
 }

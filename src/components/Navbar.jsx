@@ -34,7 +34,7 @@ export default function Navbar() {
   }, [parkList]);
 
   return (
-    <>
+    <div style={{ backgroundColor: "#EE7D00" }}>
       {/* create a responsive wrapping Flex element, small screen: column, med screen:row + space btwn */}
       <Flex
         direction={{
@@ -82,6 +82,6 @@ export default function Navbar() {
           </NavLink>
         </HStack>
       </Flex>
-    </>
+    </div>
   );
 }
