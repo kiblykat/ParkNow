@@ -155,7 +155,12 @@ export default function SearchTable() {
                           <Button
                             colorScheme="orange"
                             onClick={() =>
-                              handleFavorites(parkingLot.carpark_number)
+                              handleFavorites(
+                                parkingLot.carpark_number,
+                                parkingLot.address,
+                                parkingLot.carpark_info[0].lots_available,
+                                parkingLot.carpark_info[0].total_lots
+                              )
                             }
                           >
                             ⭐
