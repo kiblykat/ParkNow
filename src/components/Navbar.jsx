@@ -51,7 +51,7 @@ export default function Navbar() {
         }}
       >
         <Box display="flex" alignItems="center">
-          <Avatar name="ParkNow" src="/img/carIcon.jfif" m="20px" />
+          <Avatar name="ParkNow" src="/img/favicon.ico" m="20px" />
           <Heading>ParkNow</Heading>
         </Box>
 
