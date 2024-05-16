@@ -3,24 +3,10 @@ import axios from "axios";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect"; // to use toBeInTheDocument
 import Search from "./Search.jsx";
-import GlobalContext, { GlobalProvider } from "../context/GlobalContext.jsx";
+import { GlobalProvider } from "../context/GlobalContext.jsx";
 
-// jest.mock("axios");
-
-// Create a mock value for the GlobalContext
-const mockGlobalContextValue = {
-  search: "mocked search value", // Provide a mock value for search
-  setSearch: jest.fn(),
-  getSlots: jest.fn(),
-  filteredLots: [],
-};
-
-jest.mock("axios", () => {
-  const mAxiosInstance = { get: jest.fn() };
-  return {
-    create: jest.fn(() => mAxiosInstance),
-  };
-});
+//auto imports jest modules from __mocks__ folder
+jest.mock("axios");
 
 describe("apiGetFav", () => {
   beforeAll(() => {
