@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect"; // to use toBeInTheDocument
@@ -21,6 +22,7 @@ describe("apiGetFav", () => {
         <Search />
       </GlobalProvider>
     );
+
     const headerElem = screen.getByText(/page:/i);
     expect(headerElem).toBeInTheDocument();
     // const mockedSetFavoriteList = jest.fn(); //mock function

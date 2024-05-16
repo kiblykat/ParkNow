@@ -22,12 +22,12 @@ export function GlobalProvider({ children }) {
     try {
       const response = await mockAPI.get("/favorites");
       setFavoriteList(response.data);
-      console.log("response.data is: ", response.data);
-      console.log("favoriteList is: ", favoriteList);
+      // console.log("response.data is: ", response.data);
+      // console.log("favoriteList is: ", favoriteList);
     } catch (error) {
       console.log(error.message);
     } finally {
-      console.log("favorite list: ", favoriteList);
+      // console.log("favorite list: ", favoriteList);
     }
   };
 

@@ -20,7 +20,7 @@ export default function Search() {
 
   useEffect(() => {
     getSlots();
-    apiGetFav();
+    apiGetFav(); //this logs console data
   }, []);
 
   return (

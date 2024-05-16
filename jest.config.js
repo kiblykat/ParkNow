@@ -2,7 +2,7 @@
 module.exports = {
   // Other Jest configuration options...
   transform: {
-    "^.+\\.jsx?$": "babel-jest",
+    "^.+\\.(js|jsx)$": "babel-jest",
   },
   transformIgnorePatterns: [
     "/node_modules/(?!(axios)/)", // Adjust the pattern to include axios
