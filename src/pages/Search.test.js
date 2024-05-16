@@ -15,8 +15,18 @@ const mockGlobalContextValue = {
   filteredLots: [],
 };
 
+jest.mock("axios", () => {
+  const mAxiosInstance = { get: jest.fn() };
+  return {
+    create: jest.fn(() => mAxiosInstance),
+  };
+});
+
 describe("apiGetFav", () => {
-  it("contains word 'page' within document", () => {
+  beforeAll(() => {
+    axios.create.mockReturnThis();
+  });
+  it("contains word 'page' within document", async () => {
     render(
       <GlobalProvider>
         <Search />
