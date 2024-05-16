@@ -13,7 +13,6 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { NavLink } from "react-router-dom";
 
 export default function SearchTable() {
   const globalCtx = useContext(GlobalContext);

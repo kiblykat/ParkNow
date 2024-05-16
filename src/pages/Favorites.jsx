@@ -15,20 +15,12 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { NavLink } from "react-router-dom";
 
 export default function Favorites() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
-  const {
-    favoriteList,
-    setFavoriteList,
-    isLoading,
-    filteredLots,
-    shownLots,
-    getSlots,
-    apiHandleDelete,
-  } = globalCtx;
+  const { favoriteList, setFavoriteList, isLoading, apiHandleDelete } =
+    globalCtx;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +34,7 @@ export default function Favorites() {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

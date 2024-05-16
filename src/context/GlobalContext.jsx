@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import carparkDetails from "../data/HDBCarparkInformation.json";
 import mockAPI from "../api/mockapi";
 import axios from "axios";
@@ -14,7 +14,8 @@ export function GlobalProvider({ children }) {
 
   const apiHandleDelete = async (carpark_number) => {
     try {
-      const response = await mockAPI.delete(`/favorites/${carpark_number}`);
+      // const response = await mockAPI.delete(`/favorites/${carpark_number}`);
+      await mockAPI.delete(`/favorites/${carpark_number}`);
       apiGetFav();
     } catch {}
   };

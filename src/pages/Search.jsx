@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 import { Button, HStack, Input, Text } from "@chakra-ui/react";
@@ -21,6 +21,7 @@ export default function Search() {
   useEffect(() => {
     getSlots();
     apiGetFav(); //this logs console data
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
