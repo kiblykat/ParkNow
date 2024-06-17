@@ -1,6 +1,12 @@
-import { Box, Button, border } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Input, FormControl, FormLabel } from "@chakra-ui/react";
+import {
+  Input,
+  FormControl,
+  FormLabel,
+  Box,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,10 +21,18 @@ const Login = () => {
         alignItems: "center",
       }}
     >
-      <Box maxW="700px" borderWidth="1px" borderRadius="lg" p="40px 150px">
+      <Box
+        borderColor="orange.700"
+        maxW="700px"
+        borderWidth="1px"
+        borderRadius="lg"
+        p="40px 150px"
+      >
+        <Text as="b">Log In</Text>
         <FormControl>
-          <FormLabel>Username: </FormLabel>
+          <FormLabel mt="30px">Username: </FormLabel>
           <Input
+            borderColor="orange.200"
             focusBorderColor="orange.700"
             style={{ margin: "10px" }}
             onChange={(e) => setUsername(e.target.value)}
@@ -28,6 +42,7 @@ const Login = () => {
         <FormControl>
           <FormLabel>Password: </FormLabel>
           <Input
+            borderColor="orange.200"
             focusBorderColor="orange.700"
             style={{ margin: "10px" }}
             onChange={(e) => setPassword(e.target.value)}
