@@ -28,7 +28,9 @@ const Login = () => {
         borderRadius="lg"
         p="40px 150px"
       >
-        <Text as="b">Log In</Text>
+        <Text as="b" fontSize="20px">
+          Log In
+        </Text>
         <FormControl>
           <FormLabel mt="30px">Username: </FormLabel>
           <Input
