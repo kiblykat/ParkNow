@@ -6,6 +6,8 @@ import favParkingRoute from "./routes/favParkingRoute.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use(router);
 
 app.use("/", favParkingRoute);
 
