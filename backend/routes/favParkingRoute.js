@@ -17,14 +17,18 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    if (!req.body.lotNo || !req.body.address || !req.body.availLots) {
+      return res.status(400).send({ message: "send all required fields" });
+    }
     const newFavLot = {
       lotNo: req.body.lotNo,
       address: req.body.address,
       availLots: req.body.availLots,
     };
     const favParking = favParkingModel.create(newFavLot);
+    return res.status(201).send(newFavLot);
   } catch (err) {
-    res.status(400).send({ error: err.message });
+    res.status(500).send({ error: err.message });
   }
 });
 
