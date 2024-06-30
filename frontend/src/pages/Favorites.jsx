@@ -26,7 +26,7 @@ export default function Favorites() {
     const fetchData = async () => {
       try {
         const response = await mockAPI.get("/favorites");
-        // console.log("response.data is", response.data);
+        console.log("response.data is", response.data);
         setFavoriteList(response.data);
       } catch (error) {
         console.log(error.message);
