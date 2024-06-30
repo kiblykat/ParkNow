@@ -1,10 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import favParkingRoute from "./routes/favParkingRoute.js";
 
 dotenv.config();
 const app = express();
-app.use(express.json);
+app.use(express.json());
+
+app.use("/", favParkingRoute);
 
 const startServer = async () => {
   try {
