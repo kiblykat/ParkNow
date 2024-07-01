@@ -12,10 +12,11 @@ export function GlobalProvider({ children }) {
   const [favoriteList, setFavoriteList] = useState([]);
   const [shownLots, setShownLots] = useState([0, 9]);
 
-  const apiHandleDelete = async (carpark_number) => {
+  const apiHandleDelete = async (_id) => {
     try {
-      // const response = await mockAPI.delete(`/favorites/${carpark_number}`);
-      await mockAPI.delete(`/favorites/${carpark_number}`);
+      //visits delete endpoint with _id passed from frontend button click
+      await mockAPI.delete(`/favorites/${_id}`);
+      //display latest data with GET method to backend
       apiGetFav();
     } catch {}
   };

@@ -25,12 +25,14 @@ router.post("/favorites", async (req, res) => {
       !req.body.lots_available ||
       !req.body.total_lots
     ) {
+      console.log("send all required fields");
       return res.status(400).send({ message: "send all required fields" });
     }
     const isAlrPresent = await favParkingModel.findOne({
       address: req.body.address,
     });
     if (isAlrPresent) {
+      console.log("favLot already present");
       return res.status(400).send({ message: "favLot already present" });
     }
     const newFavLot = {
@@ -40,6 +42,7 @@ router.post("/favorites", async (req, res) => {
       total_lots: req.body.total_lots,
     };
     const favParking = favParkingModel.create(newFavLot);
+    console.log(`backend: ${newFavLot}`);
     return res.status(201).send(newFavLot);
   } catch (err) {
     res.status(500).send({ error: err.message });

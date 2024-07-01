@@ -100,7 +100,7 @@ export default function Favorites() {
                         <Td textAlign="center">
                           <Button
                             colorScheme="orange"
-                            onClick={() => apiHandleDelete(parkingLot.id)}
+                            onClick={() => apiHandleDelete(parkingLot._id)}
                           >
                             Delete ❌
                           </Button>
@@ -176,7 +176,7 @@ export default function Favorites() {
                         </Td>
                         <Td
                           textAlign="center"
-                          onClick={() => apiHandleDelete(parkingLot.id)}
+                          onClick={() => apiHandleDelete(parkingLot._id)}
                         >
                           ❌
                         </Td>
