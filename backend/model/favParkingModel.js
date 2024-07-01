@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const parkingSchema = mongoose.Schema({
-  lotNo: {
+  carpark_number: {
     type: String,
     required: true,
   },
@@ -9,7 +9,11 @@ const parkingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  availLots: {
+  lots_available: {
+    type: String,
+    required: true,
+  },
+  total_lots: {
     type: String,
     required: true,
   },

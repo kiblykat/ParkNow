@@ -27,9 +27,11 @@ export default function Favorites() {
       try {
         const response = await mockAPI.get("/favorites");
         console.log("response.data is", response.data);
-        setFavoriteList(response.data);
+        setFavoriteList(response.data.data);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        console.log(`favoriteList is ${favoriteList}`);
       }
     };
 
@@ -38,6 +40,8 @@ export default function Favorites() {
   }, []);
   return (
     <>
+      {console.log(Array.isArray(favoriteList))}
+
       {console.log("favorite list in Fav: " + { favoriteList })}
       {size.width > 768 ? (
         <div>

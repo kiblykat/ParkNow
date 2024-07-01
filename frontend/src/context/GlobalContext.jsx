@@ -22,8 +22,8 @@ export function GlobalProvider({ children }) {
   const apiGetFav = async () => {
     try {
       const response = await mockAPI.get("/favorites");
-      setFavoriteList(response.data);
-      // console.log("response.data is: ", response.data);
+      setFavoriteList(response.data.data);
+      console.log("response.data is: ", response.data);
       // console.log("favoriteList is: ", favoriteList);
     } catch (error) {
       console.log(error.message);
@@ -52,6 +52,7 @@ export function GlobalProvider({ children }) {
         total_lots: total_lots,
       };
       try {
+        console.log(newFavorite);
         const response = await mockAPI.post("/favorites", newFavorite);
         console.log("response data from mockapi is:", response.data);
         await apiGetFav();
