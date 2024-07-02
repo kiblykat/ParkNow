@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
-import mockAPI from "../api/mockapi";
+import parkingAPI from "../api/mockapi";
 
 import {
   Button,
@@ -25,7 +25,7 @@ export default function Favorites() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await mockAPI.get("/favorites");
+        const response = await parkingAPI.get("/favorites");
         console.log("response.data is", response.data);
         setFavoriteList(response.data.data);
       } catch (error) {

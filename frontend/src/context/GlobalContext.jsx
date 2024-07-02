@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import carparkDetails from "../data/HDBCarparkInformation.json";
-import mockAPI from "../api/mockapi";
+import parkingAPI from "../api/mockapi";
 import axios from "axios";
 
 const GlobalContext = createContext();
@@ -15,14 +15,14 @@ export function GlobalProvider({ children }) {
   const apiHandleDelete = async (_id) => {
     try {
       //visits delete endpoint with _id passed from frontend button click
-      await mockAPI.delete(`/favorites/${_id}`);
+      await parkingAPI.delete(`/favorites/${_id}`);
       //display latest data with GET method to backend
       apiGetFav();
     } catch {}
   };
   const apiGetFav = async () => {
     try {
-      const response = await mockAPI.get("/favorites");
+      const response = await parkingAPI.get("/favorites");
       setFavoriteList(response.data.data);
       console.log("response.data is: ", response.data);
       // console.log("favoriteList is: ", favoriteList);
@@ -54,7 +54,7 @@ export function GlobalProvider({ children }) {
       };
       try {
         console.log(newFavorite);
-        const response = await mockAPI.post("/favorites", newFavorite);
+        const response = await parkingAPI.post("/favorites", newFavorite);
         console.log("response data from mockapi is:", response.data);
         await apiGetFav();
       } catch (error) {
