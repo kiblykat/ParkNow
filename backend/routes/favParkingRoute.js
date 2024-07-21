@@ -34,16 +34,17 @@ router.post("/favorites", async (req, res) => {
     if (isAlrPresent) {
       console.log("favLot already present");
       return res.status(400).send({ message: "favLot already present" });
+    } else {
+      const newFavLot = {
+        carpark_number: req.body.carpark_number,
+        address: req.body.address,
+        lots_available: req.body.lots_available,
+        total_lots: req.body.total_lots,
+      };
+      const favParking = await favParkingModel.create(newFavLot);
+      console.log(`backend: ${favParking}`);
+      return res.status(201).send(favParking);
     }
-    const newFavLot = {
-      carpark_number: req.body.carpark_number,
-      address: req.body.address,
-      lots_available: req.body.lots_available,
-      total_lots: req.body.total_lots,
-    };
-    const favParking = favParkingModel.create(newFavLot);
-    console.log(`backend: ${newFavLot}`);
-    return res.status(201).send(newFavLot);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
