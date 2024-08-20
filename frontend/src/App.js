@@ -10,10 +10,10 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<Login />} />
+          <Route index path="/login" element={<Login />} />
           <Route path="/search" element={<Search />} />
           {/* <Route path="search" element={<Search />} /> */}
-          <Route path="favorites" element={<Favorites />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Route>
       </Routes>
     </HashRouter>

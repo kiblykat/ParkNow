@@ -10,16 +10,20 @@ export function AuthProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  //everytime there is an Auth State Change, this function will be called.
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
+    console.log("auth state changed");
     return unsubscribe; //unsubscribe() function to be invoked when we want to unsub the user
   }, []);
 
   async function initializeUser(user) {
     if (user) {
+      console.log("User is signed in");
       setCurrentUser({ ...user }); //spread to create shallow copy
       setUserLoggedIn(true);
     } else {
+      console.log("User is signed out");
       setCurrentUser(null);
       setUserLoggedIn(false);
     }

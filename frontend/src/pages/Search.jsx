@@ -1,12 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import AuthContext from "../context/AuthContext";
 
 import { Button, HStack, Input, Text } from "@chakra-ui/react";
 import SearchTable from "../components/SearchTable";
+import { Navigate } from "react-router-dom";
 
 export default function Search() {
   const globalCtx = useContext(GlobalContext);
+  const authCtx = useContext(AuthContext);
 
+  const { userLoggedIn } = authCtx;
   const {
     search,
     setSearch,
@@ -26,6 +30,8 @@ export default function Search() {
 
   return (
     <>
+      {/* automatically redirect back to Login page if userLoggedIn is false */}
+      {!userLoggedIn && <Navigate to={"/login"} />}
       <Input
         placeholder="Search lots"
         onChange={(e) => setSearch(e.target.value)}

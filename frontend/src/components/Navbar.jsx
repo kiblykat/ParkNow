@@ -1,6 +1,8 @@
 /*
   this file determines arrangement of items in the Navbar component at the top of the page
 */
+import { auth } from "../firebase/firebase";
+import { doSignOut } from "../firebase/auth";
 
 import { SearchIcon } from "@chakra-ui/icons";
 import { StarIcon } from "@chakra-ui/icons";
@@ -16,11 +18,14 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import GlobalContext from "../context/GlobalContext";
+import AuthContext from "../context/AuthContext";
 
 export default function Navbar() {
-  //uses context from GlobalContextProvider
+  //uses context from ContextProviders
+  const authCtx = useContext(AuthContext);
   const globalCtx = useContext(GlobalContext);
-  //destructure parkList and getSlots from globalCtx
+  //destructure properties from Context objects
+  const { userLoggedIn } = authCtx;
   const { parkList, getSlots } = globalCtx;
   //create lastFetched state to update time displayed of lastFetched
   const [lastFetched, setLastFetched] = useState("");
@@ -51,8 +56,15 @@ export default function Navbar() {
         }}
       >
         <Box display="flex" alignItems="center">
-          <Avatar name="ParkNow" src="/img/favicon.ico" m="20px" />
-          <Heading>ParkNow</Heading>
+          <HStack>
+            <Box display="flex" alignItems="center" justifyContent="flex-start">
+              <Avatar name="ParkNow" src="/img/favicon.ico" m="20px" />
+              <Heading>ParkNow</Heading>
+            </Box>
+            {userLoggedIn && (
+              <Button onClick={() => doSignOut(auth)}>Logout</Button>
+            )}
+          </HStack>
         </Box>
 
         {/* fix the stack direction to be horizontally aligned */}
@@ -62,7 +74,7 @@ export default function Navbar() {
         </HStack>
 
         <HStack m="50px">
-          <NavLink to="/">
+          <NavLink to="/search">
             <Button
               leftIcon={<SearchIcon />}
               colorScheme="orange"

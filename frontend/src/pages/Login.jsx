@@ -20,7 +20,7 @@ const Login = () => {
   const { userLoggedIn } = authCtx;
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(userLoggedIn);
+    console.log("logged in: " + userLoggedIn);
     await doSignInWithEmailAndPassword(email, password);
   };
   return (
@@ -32,7 +32,7 @@ const Login = () => {
         alignItems: "center",
       }}
     >
-      {console.log(userLoggedIn)}
+      {console.log("logged in: " + userLoggedIn)}
       {userLoggedIn && <Navigate to={"/search"} replace={true} />}
       <Box
         borderColor="orange.700"
@@ -52,7 +52,6 @@ const Login = () => {
             style={{ margin: "10px" }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            setEmail
           />
         </FormControl>
         <FormControl>
