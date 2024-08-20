@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import {
   Input,
   FormControl,
@@ -7,11 +8,21 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import { doSignInWithEmailAndPassword } from "../firebase/auth";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const authCtx = useContext(AuthContext);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [isSigningIn, setIsSigningIn] = useState(false);
 
+  const { userLoggedIn } = authCtx;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(userLoggedIn);
+    await doSignInWithEmailAndPassword(email, password);
+  };
   return (
     <div
       style={{
@@ -21,6 +32,8 @@ const Login = () => {
         alignItems: "center",
       }}
     >
+      {console.log(userLoggedIn)}
+      {userLoggedIn && <Navigate to={"/search"} replace={true} />}
       <Box
         borderColor="orange.700"
         maxW="700px"
@@ -37,8 +50,9 @@ const Login = () => {
             borderColor="orange.200"
             focusBorderColor="orange.700"
             style={{ margin: "10px" }}
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            setEmail
           />
         </FormControl>
         <FormControl>
@@ -51,7 +65,7 @@ const Login = () => {
             value={password}
           />
         </FormControl>
-        <Button>Log In</Button>
+        <Button onClick={onSubmit}>Log In</Button>
       </Box>
     </div>
   );
