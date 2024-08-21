@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import {
   Input,
   FormControl,
@@ -50,7 +50,7 @@ const Login = () => {
           <Input
             borderColor="orange.200"
             focusBorderColor="orange.700"
-            style={{ margin: "10px" }}
+            style={{ marginBottom: "10px" }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
@@ -60,14 +60,26 @@ const Login = () => {
           <Input
             borderColor="orange.200"
             focusBorderColor="orange.700"
-            style={{ margin: "10px" }}
+            style={{ marginBottom: "10px" }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
         </FormControl>
         <HStack>
-          <Button onClick={onSubmit}>Log In</Button>
-          <Button>Sign Up</Button>
+          <Button
+            width="100%"
+            alignItems="center"
+            justifyContent="center"
+            onClick={onSubmit}
+          >
+            Log In
+          </Button>
+        </HStack>
+        <HStack>
+          <Text fontSize="sm">Don't have an account?</Text>
+          <Text fontSize="sm" color="teal.500">
+            <NavLink to="/signup">Sign up</NavLink>
+          </Text>
         </HStack>
       </Box>
     </div>
