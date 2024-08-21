@@ -66,12 +66,13 @@ export default function Navbar() {
             )}
           </HStack>
         </Box>
-
-        {/* fix the stack direction to be horizontally aligned */}
-        <HStack>
-          <Button onClick={() => getSlots()}>Refresh</Button>
-          <Text textAlign="center">Data Last Fetched: {lastFetched} </Text>
-        </HStack>
+        {/* only show Refresh button if user is logged in */}
+        {userLoggedIn && (
+          <HStack>
+            <Button onClick={() => getSlots()}>Refresh</Button>
+            <Text textAlign="center">Data Last Fetched: {lastFetched} </Text>
+          </HStack>
+        )}
 
         <HStack m="50px">
           <NavLink to="/search">
