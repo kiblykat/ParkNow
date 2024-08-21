@@ -8,6 +8,7 @@ import {
   Button,
   Text,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import { doSignInWithEmailAndPassword } from "../firebase/auth";
 import AuthContext from "../context/AuthContext";
@@ -16,13 +17,31 @@ const Login = () => {
   const authCtx = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast();
   // const [isSigningIn, setIsSigningIn] = useState(false);
 
   const { userLoggedIn } = authCtx;
   const onSubmit = async (e) => {
-    e.preventDefault();
-    console.log("logged in: " + userLoggedIn);
-    await doSignInWithEmailAndPassword(email, password);
+    try {
+      e.preventDefault();
+      console.log("logged in: " + userLoggedIn);
+      await doSignInWithEmailAndPassword(email, password);
+      toast({
+        title: "Successfully logged in",
+        description: "",
+        status: "success",
+        duration: 3500,
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        title: "Invalid login details",
+        description: "",
+        status: "error",
+        duration: 3500,
+        isClosable: true,
+      });
+    }
   };
   return (
     <div
@@ -33,7 +52,6 @@ const Login = () => {
         alignItems: "center",
       }}
     >
-      {console.log("logged in: " + userLoggedIn)}
       {userLoggedIn && <Navigate to={"/search"} replace={true} />}
       <Box
         borderColor="orange.700"
