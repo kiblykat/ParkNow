@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Text,
+  HStack,
 } from "@chakra-ui/react";
 import { doSignInWithEmailAndPassword } from "../firebase/auth";
 import AuthContext from "../context/AuthContext";
@@ -64,7 +65,10 @@ const Login = () => {
             value={password}
           />
         </FormControl>
-        <Button onClick={onSubmit}>Log In</Button>
+        <HStack>
+          <Button onClick={onSubmit}>Log In</Button>
+          <Button>Sign Up</Button>
+        </HStack>
       </Box>
     </div>
   );

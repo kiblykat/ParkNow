@@ -24,7 +24,6 @@ export function GlobalProvider({ children }) {
     try {
       const response = await parkingAPI.get("/favorites");
       setFavoriteList(response.data.data);
-      console.log("response.data is: ", response.data);
       // console.log("favoriteList is: ", favoriteList);
     } catch (error) {
       console.log(error.message);
