@@ -31,7 +31,7 @@ export default function Search() {
   return (
     <>
       {/* automatically redirect back to Login page if userLoggedIn is false */}
-      {!userLoggedIn && <Navigate to={"/login"} />}
+      {!userLoggedIn && <Navigate to={"/"} />}
       <Input
         placeholder="Search lots"
         onChange={(e) => setSearch(e.target.value)}
