@@ -14,4 +14,3 @@ Live demo can be found here: https://park-now-frontend.vercel.app/
 - Backend: Node.js, Express
 - Database: MongoDB
 - Authentication: Firebase
-- 
