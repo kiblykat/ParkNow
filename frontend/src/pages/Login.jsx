@@ -66,6 +66,7 @@ const Login = () => {
         <FormControl>
           <FormLabel mt="30px">Username: </FormLabel>
           <Input
+            type="email"
             borderColor="orange.200"
             focusBorderColor="orange.700"
             style={{ marginBottom: "10px" }}
@@ -76,6 +77,7 @@ const Login = () => {
         <FormControl>
           <FormLabel>Password: </FormLabel>
           <Input
+            type="password"
             borderColor="orange.200"
             focusBorderColor="orange.700"
             style={{ marginBottom: "10px" }}
