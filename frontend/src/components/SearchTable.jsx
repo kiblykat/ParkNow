@@ -13,11 +13,14 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useWindowSize } from "@uidotdev/usehooks";
+import AuthContext from "../context/AuthContext";
 
 export default function SearchTable() {
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
   const { isLoading, handleFavorites, filteredLots, shownLots } = globalCtx;
+  const authCtx = useContext(AuthContext);
+  const { currentUser } = authCtx;
 
   return (
     <>
@@ -74,7 +77,8 @@ export default function SearchTable() {
                                 parkingLot.carpark_number,
                                 parkingLot.address,
                                 parkingLot.carpark_info[0].lots_available,
-                                parkingLot.carpark_info[0].total_lots
+                                parkingLot.carpark_info[0].total_lots,
+                                currentUser.uid
                               )
                             }
                           >
@@ -160,7 +164,8 @@ export default function SearchTable() {
                                 parkingLot.carpark_number,
                                 parkingLot.address,
                                 parkingLot.carpark_info[0].lots_available,
-                                parkingLot.carpark_info[0].total_lots
+                                parkingLot.carpark_info[0].total_lots,
+                                currentUser.uid
                               )
                             }
                           >
