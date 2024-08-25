@@ -24,7 +24,6 @@ export function GlobalProvider({ children }) {
     try {
       const response = await parkingAPI.get("/favorites");
       setFavoriteList(response.data.data);
-      console.log("response.data is: ", response.data);
       // console.log("favoriteList is: ", favoriteList);
     } catch (error) {
       console.log(error.message);
@@ -37,7 +36,8 @@ export function GlobalProvider({ children }) {
     carpark_number,
     address,
     lots_available,
-    total_lots
+    total_lots,
+    user_id
   ) => {
     // Check if the carpark_number already exists in favoriteList.
 
@@ -51,9 +51,9 @@ export function GlobalProvider({ children }) {
         address: address,
         lots_available: lots_available,
         total_lots: total_lots,
+        user_id: user_id,
       };
       try {
-        console.log(newFavorite);
         const response = await parkingAPI.post("/favorites", newFavorite);
         console.log("response data from mockapi is:", response.data);
         await apiGetFav();

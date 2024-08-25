@@ -10,10 +10,10 @@ import {
   HStack,
   useToast,
 } from "@chakra-ui/react";
-import { doSignInWithEmailAndPassword } from "../firebase/auth";
+import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
 import AuthContext from "../context/AuthContext";
 
-const Login = () => {
+const SignUp = () => {
   const authCtx = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +25,9 @@ const Login = () => {
     try {
       e.preventDefault();
       console.log("logged in: " + userLoggedIn);
-      await doSignInWithEmailAndPassword(email, password);
+      await doCreateUserWithEmailAndPassword(email, password);
       toast({
-        title: "Successfully logged in",
+        title: "Successfully Signed Up",
         description: "",
         status: "success",
         duration: 3500,
@@ -35,7 +35,7 @@ const Login = () => {
       });
     } catch (err) {
       toast({
-        title: "Invalid login details",
+        title: "Invalid sign up details",
         description: "",
         status: "error",
         duration: 3500,
@@ -61,7 +61,7 @@ const Login = () => {
         p="40px 150px"
       >
         <Text as="b" fontSize="20px">
-          Log In
+          Sign Up
         </Text>
         <FormControl>
           <FormLabel mt="30px">Username: </FormLabel>
@@ -92,13 +92,13 @@ const Login = () => {
             justifyContent="center"
             onClick={onSubmit}
           >
-            Log In
+            Sign Up
           </Button>
         </HStack>
         <HStack>
-          <Text fontSize="sm">Don't have an account?</Text>
+          <Text fontSize="sm">Already have an account?</Text>
           <Text fontSize="sm" color="teal.500">
-            <NavLink to="/signup">Sign up</NavLink>
+            <NavLink to="/">Log In</NavLink>
           </Text>
         </HStack>
       </Box>
@@ -106,4 +106,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
