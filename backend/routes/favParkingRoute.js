@@ -5,6 +5,7 @@ const router = express.Router();
 // READ all current user favorites
 router.get("/favorites", async (req, res) => {
   try {
+    console.log("debug GET: request is: " + req);
     const user_id = req.body.user_id;
     const favParking = await favParkingModel.find({ user_id });
     return res.status(200).json({
@@ -20,6 +21,7 @@ router.get("/favorites", async (req, res) => {
 // CREATE route
 router.post("/favorites", async (req, res) => {
   try {
+    console.log("debug POST: request is: " + req);
     // Check if all required fields are present in the request body
     if (
       !req.body.carpark_number ||
