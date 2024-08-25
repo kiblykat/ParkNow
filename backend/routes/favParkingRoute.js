@@ -5,7 +5,7 @@ const router = express.Router();
 // READ all current user favorites
 router.get("/favorites", async (req, res) => {
   try {
-    const user_id = req.user_id;
+    const user_id = req.body.user_id;
     const favParking = await favParkingModel.find({ user_id });
     return res.status(200).json({
       count: favParking.length,
