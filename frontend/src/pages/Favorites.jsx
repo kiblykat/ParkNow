@@ -15,12 +15,16 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useWindowSize } from "@uidotdev/usehooks";
+import AuthContext from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export default function Favorites() {
+  const authCtx = useContext(AuthContext);
   const globalCtx = useContext(GlobalContext);
   const size = useWindowSize();
   const { favoriteList, setFavoriteList, isLoading, apiHandleDelete } =
     globalCtx;
+  const { userLoggedIn } = authCtx;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +42,10 @@ export default function Favorites() {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
+      {!userLoggedIn && <Navigate to="/" />}
       {console.log(Array.isArray(favoriteList))}
 
       {console.log("favorite list in Fav: " + { favoriteList })}
