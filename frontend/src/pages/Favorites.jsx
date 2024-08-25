@@ -30,12 +30,10 @@ export default function Favorites() {
     const fetchData = async () => {
       try {
         const response = await parkingAPI.get("/favorites");
-        console.log("response.data is", response.data);
         setFavoriteList(response.data.data);
       } catch (error) {
         console.log(error.message);
       } finally {
-        console.log(`favoriteList is ${favoriteList}`);
       }
     };
 
@@ -46,9 +44,6 @@ export default function Favorites() {
   return (
     <>
       {!userLoggedIn && <Navigate to="/" />}
-      {console.log(Array.isArray(favoriteList))}
-
-      {console.log("favorite list in Fav: " + { favoriteList })}
       {size.width > 768 ? (
         <div>
           {isLoading ? (
