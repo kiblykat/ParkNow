@@ -54,7 +54,6 @@ export function GlobalProvider({ children }) {
         user_id: user_id,
       };
       try {
-        console.log("newFavorite is" + JSON.stringify(newFavorite));
         const response = await parkingAPI.post("/favorites", newFavorite);
         console.log("response data from mockapi is:", response.data);
         await apiGetFav();

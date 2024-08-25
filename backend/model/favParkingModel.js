@@ -17,6 +17,10 @@ const parkingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 export const favParkingModel = mongoose.model("FavParking", parkingSchema);
