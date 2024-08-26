@@ -5,9 +5,11 @@ const router = express.Router();
 // READ all current user favorites
 router.get("/favorites", async (req, res) => {
   try {
-    console.log("debug GET: request is: " + req);
-    const user_id = req.body.user_id;
-    const favParking = await favParkingModel.find({ user_id });
+    const user_id = req.headers.authorization.split(" ")[1];
+    console.log(user_id);
+    const favParking = await favParkingModel.find({
+      user_id: user_id,
+    });
     return res.status(200).json({
       count: favParking.length,
       data: favParking,
@@ -21,7 +23,6 @@ router.get("/favorites", async (req, res) => {
 // CREATE route
 router.post("/favorites", async (req, res) => {
   try {
-    console.log("debug POST: request is: " + req);
     // Check if all required fields are present in the request body
     if (
       !req.body.carpark_number ||
@@ -50,7 +51,6 @@ router.post("/favorites", async (req, res) => {
         user_id: req.body.user_id,
       };
 
-      console.log("1. newFavLot iss: " + newFavLot);
       // Save the new favorite parking lot entry to the database
       const favParking = await favParkingModel.create(newFavLot);
       return res.status(201).send(favParking);

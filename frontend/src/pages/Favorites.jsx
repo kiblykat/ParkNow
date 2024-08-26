@@ -24,12 +24,17 @@ export default function Favorites() {
   const size = useWindowSize();
   const { favoriteList, setFavoriteList, isLoading, apiHandleDelete } =
     globalCtx;
-  const { userLoggedIn } = authCtx;
+  const { currentUser, userLoggedIn } = authCtx;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await parkingAPI.get("/favorites");
+        //console.log("debug currentUser is: " + JSON.stringify(currentUser.uid));
+        const response = await parkingAPI.get("/favorites", {
+          headers: {
+            Authorization: `Bearer ${currentUser.uid}`,
+          },
+        });
         setFavoriteList(response.data.data);
       } catch (error) {
         console.log(error.message);
