@@ -6,7 +6,6 @@ const router = express.Router();
 router.get("/favorites", async (req, res) => {
   try {
     const user_id = req.headers.authorization.split(" ")[1];
-    console.log(user_id);
     const favParking = await favParkingModel.find({
       user_id: user_id,
     });

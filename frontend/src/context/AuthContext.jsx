@@ -19,11 +19,9 @@ export function AuthProvider({ children }) {
 
   async function initializeUser(user) {
     if (user) {
-      console.log("User is signed in");
       setCurrentUser({ ...user }); //spread to create shallow copy
       setUserLoggedIn(true);
     } else {
-      console.log("User is signed out");
       setCurrentUser(null);
       setUserLoggedIn(false);
     }
