@@ -1,7 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import carparkDetails from "../data/HDBCarparkInformation.json";
 import parkingAPI from "../api/mockapi";
 import axios from "axios";
+import AuthContext from "./AuthContext";
 
 const GlobalContext = createContext();
 
@@ -12,6 +13,8 @@ export function GlobalProvider({ children }) {
   const [favoriteList, setFavoriteList] = useState([]);
   const [shownLots, setShownLots] = useState([0, 9]);
 
+  const authCtx = useContext(AuthContext);
+  const { currentUser } = authCtx;
   const apiHandleDelete = async (_id) => {
     try {
       //visits delete endpoint with _id passed from frontend button click
@@ -22,7 +25,11 @@ export function GlobalProvider({ children }) {
   };
   const apiGetFav = async () => {
     try {
-      const response = await parkingAPI.get("/favorites");
+      const response = await parkingAPI.get("/favorites", {
+        headers: {
+          Authorization: `Bearer: ${currentUser.uid}`,
+        },
+      });
       setFavoriteList(response.data.data);
       // console.log("favoriteList is: ", favoriteList);
     } catch (error) {
