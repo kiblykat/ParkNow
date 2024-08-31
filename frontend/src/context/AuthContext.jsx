@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
     console.log("auth state changed");
-    return unsubscribe; //unsubscribe() function to be invoked when component unmounts
+    return unsubscribe; //unsubscribe() function to stop listening for changes: invoked when component unmounts
   }, []);
 
   async function initializeUser(user) {
