@@ -1,4 +1,4 @@
-# ParkNow: Providing realtime parking availability to users 🚗
+# 🚗 ParkNow: Providing realtime parking availability to users 
 
 An application bootstrapped with Chakra UI to display real-time data for parking lots retrieved from a [data.gov](https://data.gov.sg/) publicly listed API, integrated with Google Maps. 
 
