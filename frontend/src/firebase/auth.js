@@ -16,7 +16,7 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 export const doSignOut = async (auth) => {
   try {
     await signOut(auth);
-  } catch (err) {
-    console.log(console.err);
+  } catch (error) {
+    console.log(console.error);
   }
 };
