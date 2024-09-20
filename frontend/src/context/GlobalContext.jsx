@@ -27,7 +27,7 @@ export function GlobalProvider({ children }) {
     try {
       const response = await parkingAPI.get("/favorites", {
         headers: {
-          Authorization: `Bearer: ${currentUser.uid}`,
+          Authorization: `Bearer ${currentUser.uid}`,
         },
       });
       setFavoriteList(response.data.data);
