@@ -7,11 +7,7 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: '*',  // Frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']  // Custom headers if needed
-}));
+app.use(cors());
 app.use("/", favParkingRoute);
 
 const startServer = async () => {
@@ -27,6 +23,5 @@ const startServer = async () => {
 };
 
 startServer();
-console.log("");
 
 export default app;
