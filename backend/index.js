@@ -24,5 +24,6 @@ const startServer = async () => {
 };
 
 startServer();
+console.log("");
 
 export default app;
