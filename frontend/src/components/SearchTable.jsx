@@ -88,7 +88,7 @@ export default function SearchTable() {
                         <Td textAlign="center">
                           <a
                             href={`https://www.google.com/maps?q=${parkingLot.address
-                              .split(" ")
+                              ?.split(" ")
                               .join("+")}`}
                             target="_blank"
                             rel="noreferrer"
