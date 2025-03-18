@@ -15,5 +15,4 @@ Live demo can be found here: https://park-now-frontend.vercel.app/
 - Database: MongoDB
 - Authentication: Firebase
 
-(note: For prototyping purposes, to enter main landing page please click "Sign Up" and create a user with email in format a@x.com and password>=6 characters to enter)
-data validation has not been implemented for sign in/sign ups
+(note: For prototyping purposes, to enter main landing page please use email: "abc@x.com" and password: "abc123" to sign in.
